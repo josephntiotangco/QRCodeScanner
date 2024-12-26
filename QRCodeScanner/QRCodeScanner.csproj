@@ -36,10 +36,10 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<PackageId>QR Code Scanner</PackageId>
+		<PackageId>QRCodeScanner</PackageId>
 		<Company>Joseph Tiotangco</Company>
 		<Authors>Joseph Tiotangco</Authors>
-		<Product>QR Code Scanner</Product>
+		<Product>QRCodeScanner</Product>
 		<Description>Free QR Code Scanner, built with .NET MAUI with ZXing.Net.Maui</Description>
 	</PropertyGroup>
 
