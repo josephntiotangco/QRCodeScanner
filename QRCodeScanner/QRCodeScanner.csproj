@@ -24,7 +24,7 @@
 		<ApplicationTitle>QRCodeScanner</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.qrcodescanner</ApplicationId>
+		<ApplicationId>com.jnt.qrcodescanner</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -100,4 +100,12 @@
 		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.4.0" />
 	</ItemGroup>
 
+  <!--Key Store-->
+  <PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>key.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyAlias>QRCodeScanner</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>2009187791Chi</AndroidSigningKeyPass>
+    <AndroidSigningStorePass>2009187791Chi</AndroidSigningStorePass>
+  </PropertyGroup>
 </Project>

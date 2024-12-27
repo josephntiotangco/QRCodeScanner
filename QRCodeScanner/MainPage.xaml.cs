@@ -2,8 +2,9 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
+        //int count = 0;
+        string qrCodeValue;
+        Color defaultBtnColor;
         public MainPage()
         {
             InitializeComponent();
@@ -15,7 +16,8 @@
                 //Multiple  = true
                 
             };
-
+            qrCodeValue = "";
+            defaultBtnColor = btnOpenLink.BackgroundColor;
         }
 
         //private void OnCounterClicked(object sender, EventArgs e)
@@ -37,12 +39,17 @@
             if (first is null)
                 return;
 
-            Dispatcher.DispatchAsync(async () =>
+            if (string.IsNullOrEmpty(qrCodeValue))
             {
-                //await DisplayAlert("Barcode Detected", first.Value, "OK");
+                qrCodeValue = first.Value;
+                Dispatcher.DispatchAsync(async () =>
+                {
+                    lblQRResult.Text = first.Value;
+                    await DisplayAlert("QR Code Detected", first.Value, "OK");
 
-                lblQRResult.Text = first.Value;
-            });
+                    btnOpenLink.BackgroundColor = Color.FromRgb(150, 0, 0);
+                });
+            }
 
 
 
@@ -56,14 +63,27 @@
             }
             else
             {
-                Uri uri = new Uri(lblQRResult.Text);
-                await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+                try
+                {
+                    Uri uri = new Uri(lblQRResult.Text);
+                    await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Invalid QR Code Value", lblQRResult.Text, "OK");
+                }
             }
         }
 
         private void btnReset_Clicked(object sender, EventArgs e)
         {
             lblQRResult.Text = "";
+            qrCodeValue = "";
+
+            Dispatcher.DispatchAsync(async () =>
+            {
+                btnOpenLink.BackgroundColor = defaultBtnColor;
+            });
         }
     }
 
